@@ -182,14 +182,13 @@ console.log(swapMinMax([1, 2, 3, 4, 5]));
 
 // Завдання 11: Функція приймає масив чисел. Поверніть новий масив, який містить тільки парні числа з оригінального масиву.
 function getEvenNumbers(arr) {
-  let list = [];
-  for (const point of arr) {
-    if (point % 2) {
-      list = [...list, arr[point]];
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+      result = [...result, arr[i]];
     }
-    return list;
   }
-
+  return result;
   // Створюємо пустий масив для зберігання результату
   // Проходимо через кожен елемент вхідного масиву
   // Перевіряємо чи є число парним
@@ -201,11 +200,11 @@ console.log(getEvenNumbers([1, 2, 3, 4, 5, 6])); // Виведе [2, 4, 6]
 
 // Завдання 12: Функція приймає масив чисел. Поверніть новий масив, в якому всі числа помножені на їх індекс.
 function multiplyByIndex(arr) {
-  let list = [];
-  for (const point of arr) {
-    list = [...list, arr[point]];
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    result = [...result, arr[i] * i];
   }
-  return list;
+  return result;
   // Створюємо пустий масив для зберігання результату
   // Проходимо через кожен елемент вхідного масиву
   // Помножуємо число на його індекс і додаємо до масиву результату
@@ -216,14 +215,14 @@ console.log(multiplyByIndex([1, 2, 3, 4, 5])); // Виведе [0, 2, 6, 12, 20]
 
 // Завдання 13: Функція приймає масив чисел. Повертає новий масив, в якому всі числа більші за 10 замінені на рядок "Greater than 10", а решта чисел замінені на рядок "Less than or equal to 10".
 function replaceNumbers(arr) {
-  let list = [];
-  for (const point of arr)
-    if (point > 10) {
-      list = [...list, arr[point] + ["Greater than 10"]];
-    } else if (point <= 10) {
-      list = [...list, arr[point] + ["Less than or equal to 10"]];
+  let result = [];
+  for (let i = 0; i < arr.length; i++)
+    if (arr[i] > 10) {
+      result = [...result, "Greater than 10"];
+    } else {
+      result = [...result, "Less than or equal to 10"];
     }
-  return list;
+  return result;
 
   // Створюємо пустий масив для зберігання результату
   // Проходимо через кожен елемент вхідного масиву
