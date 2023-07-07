@@ -53,9 +53,8 @@ console.log("multiplyArray([1, 2, 3, 4, 5])", multiplyArray([1, 2, 3, 4, 5])); /
 function modifyArray(array) {
   for (const modify of array) {
     delete array[2];
-    console.log(array.toString(modify));
   }
-
+  console.log(array.toString());
   // Видаляємо третій елемент масиву
 
   // Виводимо масив перетворений в рядок
@@ -80,15 +79,17 @@ printUppercase(["one", "two", "three"]); // Виведе ONE TWO THREE
 // Завдання 6: Функція приймає деструктуризований масив чисел де буду перший елемент та масив всіх інших.
 // За допомогою циклу for переберіть масив, знайдіть мінімальне та максимальне значення. Результат виведіть на консоль.
 function findMinMax([firstElement, ...restElements]) {
-  let a = 5;
-  let b = 5;
-  for (const point of [, ...restElements])
-    if (point < a) {
-      a = point;
-    } else if (point > b) {
-      b = point;
+  let min = firstElement;
+  let max = firstElement;
+  for (let i = 0; i < restElements.length; i++) {
+    if (restElements[i] < min) {
+      min = restElements[i];
     }
-  console.log(a, b);
+    if (restElements[i] > max) {
+      max = restElements[i];
+    }
+  }
+  console.log("Min:", min, "Max:", max);
 }
 // Ініціалізуємо змінні для мінімального та максимального значень, задаємо їм перше значення масиву
 // Перебираємо масив починаючи з другого елементу
@@ -130,11 +131,12 @@ concatenateStrings([1, "two", 3, "four", 5], "two"); // Виведе true
 // За допомогою циклу for-in переберіть масив, додайте до кожного елемента 10.
 // Зберігайте результат в новому масиві. Результат виведіть на консоль.
 function addTenToEach(array) {
-  let list = Array(4);
+  let result = Array(array.length);
 
-  for (const point in array) {
+  for (let index in array) {
+    result[index] = array[index] + 10;
   }
-
+  console.log(result);
   // Ініціалізуємо масив через конструктор з такою же кількістю елементів як в вхідному масиві для зберігання результату
   // Перебираємо масив за допомогою циклу for-in
   // Додаємо до поточного елемента 10 та додаємо результат в новий масив
@@ -146,6 +148,25 @@ addTenToEach([5, 10, 15, 20]); // Виведе [15, 20, 25, 30]
 
 // Завдання 10: Створити функцію, яка приймає масив чисел як аргумент.
 function swapMinMax(array) {
+  let max = array[0],
+    min = array[0];
+
+  let maxIndex = 0,
+    minIndex = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > max) {
+      max = array[i];
+      maxIndex = i;
+    } else if (array[i] < min) {
+      min = array[i];
+      minIndex = i;
+    }
+  }
+
+  [array[minIndex], array[maxIndex]] = [array[maxIndex], array[minIndex]];
+
+  return array;
   // Ініціалізуємо дві змінні (max і min) з першим елементом масиву. Ці змінні будуть використовуватися для зберігання максимального та мінімального значень в масиві.
   // Ініціалізуємо дві змінні (maxIndex і minIndex) з нульового значення. Ці змінні будуть використовуватися для зберігання індексів максимального та мінімального значень в масиві.
   // Використовуємо цикл for для ітерації по масиву. Починаємо з першого елемента (i = 0) і продовжуємо до останнього елемента масиву (i < array.length).
@@ -164,7 +185,7 @@ function getEvenNumbers(arr) {
   let list = [];
   for (const point of arr) {
     if (point % 2) {
-      point + list;
+      list = [...list, arr[point]];
     }
     return list;
   }
@@ -181,6 +202,10 @@ console.log(getEvenNumbers([1, 2, 3, 4, 5, 6])); // Виведе [2, 4, 6]
 // Завдання 12: Функція приймає масив чисел. Поверніть новий масив, в якому всі числа помножені на їх індекс.
 function multiplyByIndex(arr) {
   let list = [];
+  for (const point of arr) {
+    list = [...list, arr[point]];
+  }
+  return list;
   // Створюємо пустий масив для зберігання результату
   // Проходимо через кожен елемент вхідного масиву
   // Помножуємо число на його індекс і додаємо до масиву результату
@@ -194,9 +219,9 @@ function replaceNumbers(arr) {
   let list = [];
   for (const point of arr)
     if (point > 10) {
-      point + "Greater than 10";
+      list = [...list, arr[point] + ["Greater than 10"]];
     } else if (point <= 10) {
-      point + "Less than or equal to 10";
+      list = [...list, arr[point] + ["Less than or equal to 10"]];
     }
   return list;
 
